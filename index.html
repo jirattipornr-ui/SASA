@@ -10,9 +10,13 @@
 
   <meta name="theme-color" content="#fff4c7">
 
-  <title>SASA</title>
+  <title>SASA Gift</title>
 
   <style>
+    /* =========================
+       ตั้งค่าพื้นฐาน
+    ========================== */
+
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -26,6 +30,8 @@
     }
 
     body {
+      overflow: hidden;
+
       font-family:
         system-ui,
         -apple-system,
@@ -33,26 +39,26 @@
         "Segoe UI",
         sans-serif;
 
-      background: #f3f3f3;
-      color: #222;
+      background-color: #fff5d7;
+      color: #2d2530;
     }
 
     button {
       font: inherit;
     }
 
-    /* หน้าแรก */
-    .welcome-page {
+    .page {
       position: fixed;
       inset: 0;
-      z-index: 10;
 
+      width: 100%;
+      min-height: 100vh;
       min-height: 100svh;
 
       padding:
         calc(24px + env(safe-area-inset-top))
-        24px
-        calc(30px + env(safe-area-inset-bottom));
+        22px
+        calc(28px + env(safe-area-inset-bottom));
 
       display: flex;
       flex-direction: column;
@@ -60,45 +66,52 @@
       align-items: center;
 
       text-align: center;
+    }
+
+    /* =========================
+       หน้าแรก
+    ========================== */
+
+    .welcome-page {
+      z-index: 20;
 
       background:
         linear-gradient(
           160deg,
-          #fffdf5 0%,
-          #fff1ba 55%,
-          #ffd86b 100%
+          #fffdf7 0%,
+          #fff0ba 55%,
+          #ffd46c 100%
         );
 
       transition:
-        opacity 0.5s ease,
-        visibility 0.5s ease,
-        transform 0.5s ease;
+        opacity 0.65s ease,
+        transform 0.65s ease,
+        visibility 0.65s ease;
     }
 
     .welcome-page.hide {
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-20px);
+      transform: translateY(-30px);
       pointer-events: none;
     }
 
-    /* กล่องภาพ GIF */
     .gif-container {
-      width: min(78vw, 360px);
+      width: min(76vw, 350px);
       aspect-ratio: 1 / 1;
+
+      overflow: hidden;
 
       display: flex;
       justify-content: center;
       align-items: center;
 
-      overflow: hidden;
-
-      background: rgba(255, 255, 255, 0.65);
-      border: 3px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.72);
+      border: 3px solid rgba(255, 255, 255, 0.9);
       border-radius: 34px;
 
       box-shadow:
-        0 20px 50px rgba(80, 60, 0, 0.18);
+        0 18px 45px rgba(112, 78, 0, 0.18);
     }
 
     .welcome-gif {
@@ -110,38 +123,63 @@
     }
 
     .welcome-title {
-      margin: 28px 0 8px;
+      margin: 26px 0 8px;
 
-      font-size: clamp(38px, 8vw, 58px);
-      font-weight: 800;
+      font-size: clamp(40px, 10vw, 62px);
+      font-weight: 850;
       line-height: 1.1;
     }
 
-    .welcome-text {
-      margin: 0;
+   .welcome-text {
+  margin: 0;
 
-      color: #65581f;
-      font-size: 17px;
-      line-height: 1.6;
-    }
+  color: #715e28;
+  font-size: clamp(16px, 4.5vw, 19px);
+  line-height: 1.6;
+}
+
+.password-input {
+  width: min(100%, 300px);
+
+  margin-top: 20px;
+  padding: 15px;
+
+  border: 2px solid #ffd24d;
+  border-radius: 15px;
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.9);
+
+  font-size: 18px;
+  text-align: center;
+
+  box-shadow: 0 8px 20px rgba(112, 78, 0, 0.12);
+}
+
+.password-input:focus {
+  border-color: #e9a900;
+  box-shadow: 0 0 0 4px rgba(255, 210, 77, 0.3);
+}
+    
 
     .next-button {
       width: min(100%, 330px);
       min-height: 58px;
 
-      margin-top: 32px;
-      padding: 14px 24px;
+      margin-top: 30px;
+      padding: 14px 26px;
 
-      border: none;
+      border: 0;
       border-radius: 999px;
 
-      background: #222;
-      color: white;
+      background-color: #29222b;
+      color: #ffffff;
 
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 750;
 
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+      box-shadow:
+        0 12px 28px rgba(41, 34, 43, 0.24);
 
       cursor: pointer;
 
@@ -151,76 +189,524 @@
     }
 
     .next-button:hover {
-      opacity: 0.88;
+      opacity: 0.9;
     }
 
     .next-button:active {
       transform: scale(0.96);
     }
 
-    /* หน้าหลังจากกดต่อไป */
-    .main-page {
-      min-height: 100svh;
+    /* =========================
+       หน้ากล่องของขวัญ
+    ========================== */
 
-      padding:
-        calc(30px + env(safe-area-inset-top))
-        22px
-        calc(30px + env(safe-area-inset-bottom));
+    .gift-page {
+      z-index: 10;
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at top,
+          #fffefa 0%,
+          #fff1c9 45%,
+          #ffd786 100%
+        );
+    }
+
+    .gift-title {
+      margin: 0 0 8px;
+
+      font-size: clamp(29px, 8vw, 48px);
+      font-weight: 850;
+    }
+
+    .gift-description {
+      margin: 0 0 38px;
+
+      color: #7d6234;
+      font-size: clamp(15px, 4vw, 18px);
+      line-height: 1.6;
+    }
+
+    .gift-area {
+      position: relative;
+
+      width: 280px;
+      height: 270px;
 
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: flex-end;
+    }
+
+    /* =========================
+       ปุ่มกล่องของขวัญ
+    ========================== */
+
+    .gift-button {
+      position: relative;
+      z-index: 5;
+
+      width: 220px;
+      height: 210px;
+
+      padding: 0;
+      border: 0;
+      background: transparent;
+
+      cursor: pointer;
+
+      animation: giftFloat 2.3s ease-in-out infinite;
+    }
+
+    .gift-button:active {
+      transform: scale(0.96);
+    }
+
+    .gift-button.opened {
+      animation: none;
+    }
+
+    /* =========================
+       ตัวกล่องสีเหลือง
+    ========================== */
+
+    .gift-box-body {
+      position: absolute;
+      left: 15px;
+      bottom: 0;
+
+      width: 190px;
+      height: 145px;
+
+      overflow: hidden;
 
       background:
         linear-gradient(
           135deg,
-          #f8f8f8,
-          #eeeeee
+          #ffe66f 0%,
+          #ffd036 45%,
+          #f4ae00 100%
+        );
+
+      border-radius: 10px 10px 22px 22px;
+
+      box-shadow:
+        0 20px 35px rgba(150, 100, 0, 0.3);
+    }
+
+    /* ริบบิ้นแดงแนวตั้งบนตัวกล่อง */
+
+    .gift-box-body::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: 50%;
+
+      width: 36px;
+      height: 100%;
+
+      transform: translateX(-50%);
+
+      background:
+        linear-gradient(
+          90deg,
+          #9e1028 0%,
+          #ef3e52 45%,
+          #b91630 100%
         );
     }
 
-    .main-card {
+    /* แสงเงาบนตัวกล่อง */
+
+    .gift-box-body::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.38),
+          transparent 45%
+        );
+
+      pointer-events: none;
+    }
+
+    /* =========================
+       ฝากล่องสีเหลือง
+    ========================== */
+
+    .gift-lid {
+      position: absolute;
+      left: 4px;
+      bottom: 132px;
+      z-index: 3;
+
+      width: 212px;
+      height: 56px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffef8c 0%,
+          #ffd43c 50%,
+          #f2ad00 100%
+        );
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 9px 18px rgba(135, 90, 0, 0.28);
+
+      transform-origin: 25px 50px;
+
+      transition:
+        transform 0.8s cubic-bezier(0.3, 1.4, 0.5, 1),
+        opacity 0.5s ease;
+    }
+
+    /* ริบบิ้นแดงบนฝากล่อง */
+
+    .gift-lid::before {
+      content: "";
+
+      position: absolute;
+      top: 0;
+      left: 50%;
+
+      width: 36px;
+      height: 100%;
+
+      transform: translateX(-50%);
+
+      background:
+        linear-gradient(
+          90deg,
+          #9e1028 0%,
+          #ef3e52 45%,
+          #b91630 100%
+        );
+    }
+
+    /* =========================
+       โบว์สีแดง
+    ========================== */
+
+    .bow {
+      position: absolute;
+      left: 50%;
+      bottom: 178px;
+      z-index: 4;
+
+      width: 54px;
+      height: 40px;
+
+      transform: translateX(-50%);
+
+      transition:
+        transform 0.8s cubic-bezier(0.3, 1.4, 0.5, 1),
+        opacity 0.5s ease;
+    }
+
+    .bow-left,
+    .bow-right {
+      position: absolute;
+      top: 0;
+
+      width: 50px;
+      height: 38px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff596a 0%,
+          #dd263f 50%,
+          #950e27 100%
+        );
+
+      border-radius: 50% 50% 12px 50%;
+
+      box-shadow:
+        0 5px 12px rgba(120, 10, 30, 0.25);
+    }
+
+    .bow-left {
+      right: 25px;
+      transform: rotate(18deg);
+    }
+
+    .bow-right {
+      left: 25px;
+      transform: scaleX(-1) rotate(18deg);
+    }
+
+    .bow-center {
+      position: absolute;
+      top: 9px;
+      left: 50%;
+      z-index: 2;
+
+      width: 29px;
+      height: 29px;
+
+      transform: translateX(-50%);
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff6372,
+          #a90f29
+        );
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 4px 8px rgba(120, 10, 30, 0.25);
+    }
+
+    /* เปิดฝากล่อง */
+
+    .gift-button.opened .gift-lid {
+      transform:
+        translate(-34px, -82px)
+        rotate(-32deg);
+    }
+
+    .gift-button.opened .bow {
+      transform:
+        translate(-85px, -88px)
+        rotate(-32deg);
+    }
+
+    /* =========================
+       ข้อความหลังเปิด
+    ========================== */
+
+    .surprise-message {
+      min-height: 42px;
+      margin-top: 20px;
+
+      opacity: 0;
+      transform: translateY(14px);
+
+      color: #c3325d;
+      font-size: clamp(22px, 6vw, 31px);
+      font-weight: 850;
+
+      transition:
+        opacity 0.6s ease 0.3s,
+        transform 0.6s ease 0.3s;
+    }
+
+    .surprise-message.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================
+       หัวใจพุ่งออกจากกล่อง
+    ========================== */
+
+    .heart {
+      position: absolute;
+      left: 50%;
+      bottom: 100px;
+      z-index: 3;
+
+      display: block;
+
+      opacity: 0;
+      pointer-events: none;
+
+      font-size: var(--heart-size);
+
+      animation:
+        heartBurst var(--heart-duration)
+        ease-out forwards;
+    }
+
+    /* =========================
+       ชั้นสำหรับอีโมจิร่วงเต็มจอ
+    ========================== */
+
+    .emoji-rain-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+
       width: 100%;
-      max-width: 520px;
-      padding: 36px 26px;
+      height: 100%;
 
-      text-align: center;
-
-      background: white;
-      border-radius: 28px;
-
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      pointer-events: none;
     }
 
-    .main-card h2 {
-      margin: 0 0 12px;
-      font-size: 30px;
+    /* อีโมจิแต่ละตัว */
+
+    .falling-emoji {
+      position: absolute;
+
+      top: -100px;
+      left: var(--emoji-left);
+
+      display: block;
+
+      opacity: 0;
+
+      font-size: var(--emoji-size);
+
+      pointer-events: none;
+      user-select: none;
+
+      filter:
+        drop-shadow(
+          0 4px 6px rgba(120, 30, 50, 0.2)
+        );
+
+      animation:
+        emojiFall
+        var(--emoji-duration)
+        linear
+        forwards;
+
+      animation-delay: var(--emoji-delay);
     }
 
-    .main-card p {
-      margin: 0;
+    /* =========================
+       แอนิเมชัน
+    ========================== */
 
-      color: #666;
-      font-size: 17px;
-      line-height: 1.7;
+    @keyframes giftFloat {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-9px);
+      }
+    }
+
+    @keyframes heartBurst {
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(-50%, 20px)
+          scale(0.3)
+          rotate(0deg);
+      }
+
+      18% {
+        opacity: 1;
+      }
+
+      70% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(
+            calc(-50% + var(--heart-x)),
+            var(--heart-y)
+          )
+          scale(1.25)
+          rotate(var(--heart-rotate));
+      }
+    }
+
+    /* อีโมจิร่วงจากบนลงล่าง */
+
+    @keyframes emojiFall {
+      0% {
+        opacity: 0;
+
+        transform:
+          translateX(0)
+          translateY(-10vh)
+          rotate(0deg)
+          scale(0.5);
+      }
+
+      8% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 1;
+
+        transform:
+          translateX(
+            calc(var(--emoji-drift) * 0.5)
+          )
+          translateY(55vh)
+          rotate(
+            calc(var(--emoji-rotate) * 0.5)
+          )
+          scale(1);
+      }
+
+      90% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translateX(var(--emoji-drift))
+          translateY(125vh)
+          rotate(var(--emoji-rotate))
+          scale(1.15);
+      }
+    }
+
+    /* ปรับสำหรับโทรศัพท์จอสั้น */
+
+    @media (max-height: 680px) {
+      .gift-description {
+        margin-bottom: 15px;
+      }
+
+      .gift-area {
+        transform: scale(0.82);
+        margin: -18px 0;
+      }
+
+      .surprise-message {
+        margin-top: 5px;
+      }
     }
 
     /* ปรับสำหรับหน้าจอคอม */
+
     @media (min-width: 768px) {
+      .gift-area {
+        transform: scale(1.08);
+        margin: 10px 0;
+      }
+
       .gif-container {
-        width: 360px;
+        width: 350px;
       }
+    }
 
-      .welcome-title {
-        font-size: 58px;
-      }
+    /* ลดการเคลื่อนไหวตามการตั้งค่าของเครื่อง */
 
-      .welcome-text {
-        font-size: 19px;
-      }
-
-      .next-button {
-        width: 330px;
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -228,55 +714,421 @@
 
 <body>
 
-  <!-- หน้าแรก -->
+  <!-- =========================
+       หน้าแรก
+  ========================== -->
+
   <section
-    class="welcome-page"
+    class="page welcome-page"
     id="welcomePage"
   >
     <div class="gif-container">
+
+      <!-- รูป GIF ต้องชื่อ 1.gif -->
       <img
         class="welcome-gif"
         src="1.gif"
         alt="ภาพต้อนรับ"
       >
+
     </div>
 
     <h1 class="welcome-title">
-      สวัสดี
+      โย่ว
     </h1>
 
     <p class="welcome-text">
-      ยินดีต้อนรับ 🌻
-    </p>
+  ใส่รหัสเพื่อไปต่อ 💛
+</p>
+
+    <input
+    id="passwordInput"
+    type="password"
+    placeholder="กรอกรหัส"
+    class="password-input"
+    >
 
     <button
-      class="next-button"
-      type="button"
-      onclick="goToNextPage()"
+    class="next-button"
+    type="button"
+    onclick="checkPassword()"
     >
-      ต่อไป
+    NEXT
     </button>
+
   </section>
 
-  <!-- หน้าถัดไป -->
-  <main class="main-page">
-    <section class="main-card">
-      <h2>หน้าหลัก 🌻</h2>
+  <!-- =========================
+       หน้ากล่องของขวัญ
+  ========================== -->
 
-      <p>
-        หน้านี้จะแสดงหลังจากกดปุ่มต่อไป
-      </p>
-    </section>
+  <main class="page gift-page">
+
+    <h2 class="gift-title">
+    
+    </h2>
+
+    <p class="gift-description">
+   
+    </p>
+
+    <div
+      class="gift-area"
+      id="giftArea"
+    >
+
+      <button
+        class="gift-button"
+        id="giftButton"
+        type="button"
+        aria-label="เปิดกล่องของขวัญ"
+        onclick="openGift()"
+      >
+
+        <!-- โบว์สีแดง -->
+        <div class="bow">
+          <span class="bow-left"></span>
+          <span class="bow-right"></span>
+          <span class="bow-center"></span>
+        </div>
+
+        <!-- ฝากล่องสีเหลือง -->
+        <div class="gift-lid"></div>
+
+        <!-- ตัวกล่องสีเหลือง -->
+        <div class="gift-box-body"></div>
+
+      </button>
+
+    </div>
+
+    <div
+      class="surprise-message"
+      id="surpriseMessage"
+    >
+      
+    </div>
+    <button
+    id="nextGiftButton"
+    class="next-button"
+    style="display:none;margin-top:20px;"
+    onclick="goNextPage()"
+    >
+
+    ถัดไป ❤️
+
+    </button>
   </main>
 
-  <script>
-    function goToNextPage() {
-      const welcomePage =
-        document.getElementById("welcomePage");
+  <!-- พื้นที่สำหรับอีโมจิร่วงเต็มหน้าจอ -->
+  <div
+    class="emoji-rain-layer"
+    id="emojiRainLayer"
+    aria-hidden="true"
+  ></div>
+<script>
+  const welcomePage =
+    document.getElementById("welcomePage");
 
+  const giftButton =
+    document.getElementById("giftButton");
+
+  const giftArea =
+    document.getElementById("giftArea");
+
+  const surpriseMessage =
+    document.getElementById("surpriseMessage");
+
+  const emojiRainLayer =
+    document.getElementById("emojiRainLayer");
+
+  const passwordInput =
+    document.getElementById("passwordInput");
+
+  const nextGiftButton =
+    document.getElementById("nextGiftButton");
+
+  /*
+    เปลี่ยนรหัสตรงนี้
+  */
+  const PASSWORD = "1234";
+
+  let giftIsOpen = false;
+  let wrongCount = 0;
+
+  /* =========================
+     ตรวจสอบรหัส
+  ========================== */
+
+  function checkPassword() {
+    const enteredPassword =
+      passwordInput.value.trim();
+
+    if (enteredPassword === PASSWORD) {
       welcomePage.classList.add("hide");
+      passwordInput.blur();
+      return;
     }
-  </script>
+
+    wrongCount += 1;
+
+    if (wrongCount === 1) {
+      alert("นายโคตรจะมั่วเลย 😂");
+    } else if (wrongCount === 2) {
+      alert("ชื่อพ่อนาย 😏");
+    } else if (wrongCount === 3) {
+      alert("อะล้อเล่นนน 🤣 อายุเท่าไหร่ล้าา");
+    } else {
+      alert("ยังไม่ถูกน้าา ลองใหม่อีกที 💛");
+    }
+
+    passwordInput.value = "";
+    passwordInput.focus();
+  }
+
+  /*
+    กด Enter เพื่อตรวจรหัสได้ด้วย
+  */
+
+  passwordInput.addEventListener(
+    "keydown",
+    function (event) {
+      if (event.key === "Enter") {
+        checkPassword();
+      }
+    }
+  );
+
+  /* =========================
+     เปิดกล่องของขวัญ
+  ========================== */
+
+  function openGift() {
+    /*
+      เมื่อเปิดแล้ว กดกล่องซ้ำจะไม่ปิด
+      เพื่อไม่ให้ปุ่มถัดไปหาย
+    */
+
+    if (giftIsOpen) {
+      return;
+    }
+
+    giftIsOpen = true;
+
+    giftButton.classList.add("opened");
+    surpriseMessage.classList.add("show");
+
+    createHearts();
+    createEmojiRain();
+
+    /*
+      ให้ปุ่มถัดไปปรากฏหลังเปิดกล่อง
+      หน่วงเล็กน้อยเพื่อให้หัวใจกระจายก่อน
+    */
+
+    setTimeout(() => {
+      nextGiftButton.style.display = "block";
+    }, 1200);
+  }
+
+  /* =========================
+     สร้างหัวใจออกจากกล่อง
+  ========================== */
+
+  function createHearts() {
+    const heartSymbols = [
+      "💖",
+      "💗",
+      "💕",
+      "💓",
+      "❤️",
+      "💛",
+      "💋"
+    ];
+
+    const numberOfHearts = 100;
+
+    for (
+      let index = 0;
+      index < numberOfHearts;
+      index += 1
+    ) {
+      const heart =
+        document.createElement("span");
+
+      heart.className = "heart";
+
+      heart.textContent =
+        heartSymbols[
+          Math.floor(
+            Math.random() * heartSymbols.length
+          )
+        ];
+
+      const horizontalMovement =
+        Math.floor(Math.random() * 360) - 180;
+
+      const verticalMovement =
+        -(Math.floor(Math.random() * 280) + 150);
+
+      const heartSize =
+        Math.floor(Math.random() * 23) + 20;
+
+      const heartRotation =
+        `${Math.floor(Math.random() * 160) - 80}deg`;
+
+      const heartDuration =
+        `${1.7 + Math.random() * 1.4}s`;
+
+      const delay =
+        `${Math.random() * 0.45}s`;
+
+      heart.style.setProperty(
+        "--heart-x",
+        `${horizontalMovement}px`
+      );
+
+      heart.style.setProperty(
+        "--heart-y",
+        `${verticalMovement}px`
+      );
+
+      heart.style.setProperty(
+        "--heart-size",
+        `${heartSize}px`
+      );
+
+      heart.style.setProperty(
+        "--heart-rotate",
+        heartRotation
+      );
+
+      heart.style.setProperty(
+        "--heart-duration",
+        heartDuration
+      );
+
+      heart.style.animationDelay = delay;
+
+      giftArea.appendChild(heart);
+
+      heart.addEventListener(
+        "animationend",
+        () => {
+          heart.remove();
+        }
+      );
+    }
+  }
+
+  /* =========================
+     สร้างอีโมจิร่วงลงมา
+  ========================== */
+
+  function createEmojiRain() {
+    const emojiSymbols = [
+      "🎉",
+      "🎊",
+      "🎂",
+      "🎁",
+      "🥳",
+      "✨",
+      "💖",
+      "💗",
+      "💕",
+      "❤️",
+      "💛",
+      "💋",
+      "😘",
+      "รักนายย"
+    ];
+
+    const numberOfEmojis = 100;
+
+    for (
+      let index = 0;
+      index < numberOfEmojis;
+      index += 1
+    ) {
+      const emoji =
+        document.createElement("span");
+
+      emoji.className = "falling-emoji";
+
+      emoji.textContent =
+        emojiSymbols[
+          Math.floor(
+            Math.random() * emojiSymbols.length
+          )
+        ];
+
+      const emojiLeft =
+        Math.floor(Math.random() * 100);
+
+      const emojiSize =
+        Math.floor(Math.random() * 30) + 22;
+
+      const emojiDuration =
+        3.2 + Math.random() * 3.3;
+
+      const emojiDelay =
+        Math.random() * 2.8;
+
+      const emojiDrift =
+        Math.floor(Math.random() * 220) - 110;
+
+      const emojiRotate =
+        Math.floor(Math.random() * 720) - 360;
+
+      emoji.style.setProperty(
+        "--emoji-left",
+        `${emojiLeft}%`
+      );
+
+      emoji.style.setProperty(
+        "--emoji-size",
+        `${emojiSize}px`
+      );
+
+      emoji.style.setProperty(
+        "--emoji-duration",
+        `${emojiDuration}s`
+      );
+
+      emoji.style.setProperty(
+        "--emoji-delay",
+        `${emojiDelay}s`
+      );
+
+      emoji.style.setProperty(
+        "--emoji-drift",
+        `${emojiDrift}px`
+      );
+
+      emoji.style.setProperty(
+        "--emoji-rotate",
+        `${emojiRotate}deg`
+      );
+
+      emojiRainLayer.appendChild(emoji);
+
+      emoji.addEventListener(
+        "animationend",
+        () => {
+          emoji.remove();
+        }
+      );
+    }
+  }
+
+  /* =========================
+     ปุ่มถัดไปหลังเปิดกล่อง
+  ========================== */
+
+  function goNextPage() {
+    alert("กำลังไปหน้าถัดไป ❤️");
+  }
+</script>
 
 </body>
 </html>
