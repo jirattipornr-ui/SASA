@@ -709,6 +709,265 @@
         transition-duration: 0.01ms !important;
       }
     }
+        /* =========================
+      หน้าเกมจำสีรูบิก
+    ========================== */
+
+    .rubik-game-page {
+      z-index: 30;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transform: translateY(30px);
+
+      background:
+        radial-gradient(
+          circle at top,
+          #fffefa 0%,
+          #fff1c9 48%,
+          #ffd16a 100%
+        );
+
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        visibility 0.6s ease;
+    }
+
+    .rubik-game-page.show {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+
+      transform: translateY(0);
+    }
+
+    .gift-page.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+
+      transform: translateY(-30px);
+
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        visibility 0.6s ease;
+    }
+
+    .rubik-game-card {
+      width: min(100%, 430px);
+
+      padding: 28px 22px;
+
+      background: rgba(255, 255, 255, 0.9);
+
+      border: 2px solid rgba(255, 255, 255, 0.96);
+      border-radius: 28px;
+
+      box-shadow:
+        0 20px 48px rgba(116, 77, 0, 0.18);
+    }
+
+    .rubik-game-title {
+      margin: 0;
+
+      font-size: clamp(28px, 8vw, 42px);
+      font-weight: 850;
+    }
+
+    .rubik-game-description {
+      margin: 10px 0 18px;
+
+      color: #745d2d;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .rubik-level {
+      margin-bottom: 16px;
+
+      color: #9b6d00;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .rubik-status {
+      min-height: 52px;
+
+      margin: 0 0 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #3b303c;
+
+      font-size: 18px;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    .color-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 12px;
+    }
+
+    .color-button {
+      aspect-ratio: 1 / 1;
+
+      border: 5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+
+      box-shadow:
+        0 8px 15px rgba(50, 35, 20, 0.18);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease,
+        filter 0.15s ease,
+        box-shadow 0.15s ease,
+        opacity 0.15s ease;
+    }
+
+    .color-button:active {
+      transform: scale(0.93);
+    }
+
+    .color-button:disabled {
+      cursor: default;
+    }
+
+    .color-button.flash {
+      transform: scale(1.08);
+
+      filter: brightness(1.5);
+
+      box-shadow:
+        0 0 0 7px rgba(255, 255, 255, 0.9),
+        0 0 28px currentColor;
+    }
+
+    .color-red {
+      color: #ef3340;
+      background: #ef3340;
+    }
+
+    .color-orange {
+      color: #ff7a00;
+      background: #ff7a00;
+    }
+
+    .color-yellow {
+      color: #ffd500;
+      background: #ffd500;
+    }
+
+    .color-green {
+      color: #21a366;
+      background: #21a366;
+    }
+
+    .color-blue {
+      color: #1976d2;
+      background: #1976d2;
+    }
+
+    .color-white {
+      color: #d7d7d7;
+      background: #f7f7f7;
+    }
+
+    .start-color-game {
+      width: 100%;
+      min-height: 55px;
+
+      margin-top: 22px;
+
+      border: 0;
+      border-radius: 999px;
+
+      background: #29222b;
+      color: #ffffff;
+
+      font-size: 17px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 10px 25px rgba(41, 34, 43, 0.22);
+    }
+
+    .start-color-game:active {
+      transform: scale(0.97);
+    }
+
+    .rubik-result {
+      display: none;
+    }
+
+    .rubik-result.show {
+      display: block;
+
+      animation: rubikResultAppear 0.7s ease;
+    }
+
+    .rubik-cube {
+      width: 210px;
+
+      margin: 0 auto 24px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 7px;
+
+      transform: rotate(-4deg);
+    }
+
+    .rubik-square {
+      aspect-ratio: 1 / 1;
+
+      border: 5px solid #242124;
+      border-radius: 8px;
+
+      box-shadow:
+        0 7px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .rubik-result-title {
+      margin: 0 0 10px;
+
+      font-size: clamp(30px, 8vw, 44px);
+      font-weight: 850;
+    }
+
+    .rubik-result-text {
+      margin: 0;
+
+      color: #715b2d;
+
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    @keyframes rubikResultAppear {
+      from {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+}
   </style>
 </head>
 
@@ -738,7 +997,7 @@
     </h1>
 
     <p class="welcome-text">
-  ใส่รหัสเพื่อไปต่อ 💛
+  คิดสิ คิดสิ คิดสิ 💛
 </p>
 
     <input
@@ -762,7 +1021,10 @@
        หน้ากล่องของขวัญ
   ========================== -->
 
-  <main class="page gift-page">
+  <main
+  class="page gift-page"
+  id="giftPage"
+  > 
 
     <h2 class="gift-title">
     
@@ -819,7 +1081,134 @@
 
     </button>
   </main>
+  <!-- =========================
+     หน้าเกมจำสีรูบิก
+========================== -->
 
+<section
+  class="page rubik-game-page"
+  id="rubikGamePage"
+>
+  <div class="rubik-game-card">
+
+    <div id="rubikGameContent">
+
+      <h2 class="rubik-game-title">
+        ปริศนาสีทั้งหก 🎨
+      </h2>
+
+      <p class="rubik-game-description">
+        จดจำลำดับสีที่กะพริบ แล้วกดตามให้ถูกต้อง
+      </p>
+
+      <div
+        class="rubik-level"
+        id="rubikLevel"
+      >
+        ด่านที่ 1 จาก 3
+      </div>
+
+      <p
+        class="rubik-status"
+        id="rubikStatus"
+        aria-live="polite"
+      >
+        กดเริ่มเกมเพื่อดูลำดับสี
+      </p>
+
+      <div class="color-buttons">
+
+        <button
+          class="color-button color-red"
+          type="button"
+          data-color="red"
+          aria-label="สีแดง"
+        ></button>
+
+        <button
+          class="color-button color-orange"
+          type="button"
+          data-color="orange"
+          aria-label="สีส้ม"
+        ></button>
+
+        <button
+          class="color-button color-yellow"
+          type="button"
+          data-color="yellow"
+          aria-label="สีเหลือง"
+        ></button>
+
+        <button
+          class="color-button color-green"
+          type="button"
+          data-color="green"
+          aria-label="สีเขียว"
+        ></button>
+
+        <button
+          class="color-button color-blue"
+          type="button"
+          data-color="blue"
+          aria-label="สีน้ำเงิน"
+        ></button>
+
+        <button
+          class="color-button color-white"
+          type="button"
+          data-color="white"
+          aria-label="สีขาว"
+        ></button>
+
+      </div>
+
+      <button
+        class="start-color-game"
+        id="startColorGameButton"
+        type="button"
+      >
+        เริ่มเกม 🧩
+      </button>
+
+    </div>
+
+    <!-- เฉลยของขวัญ -->
+
+    <div
+      class="rubik-result"
+      id="rubikResult"
+    >
+
+      <div class="rubik-cube">
+
+        <div class="rubik-square color-red"></div>
+        <div class="rubik-square color-blue"></div>
+        <div class="rubik-square color-yellow"></div>
+
+        <div class="rubik-square color-green"></div>
+        <div class="rubik-square color-white"></div>
+        <div class="rubik-square color-orange"></div>
+
+        <div class="rubik-square color-blue"></div>
+        <div class="rubik-square color-red"></div>
+        <div class="rubik-square color-green"></div>
+
+      </div>
+
+      <h2 class="rubik-result-title">
+        เฉลยคือ... รูบิก! 🧩
+      </h2>
+
+      <p class="rubik-result-text">
+        ของขวัญชิ้นนี้มีสีสัน<br>
+        ต้องใช้ทั้งมือ ความคิด และความเร็ว<br>
+        หวังว่านายจะชอบนะ ❤️
+      </p>
+
+    </div>
+
+  </div>
+</section>
   <!-- พื้นที่สำหรับอีโมจิร่วงเต็มหน้าจอ -->
   <div
     class="emoji-rain-layer"
@@ -847,7 +1236,29 @@
 
   const nextGiftButton =
     document.getElementById("nextGiftButton");
+  const giftPage =
+  document.getElementById("giftPage");
 
+const rubikGamePage =
+  document.getElementById("rubikGamePage");
+
+const rubikGameContent =
+  document.getElementById("rubikGameContent");
+
+const rubikLevel =
+  document.getElementById("rubikLevel");
+
+const rubikStatus =
+  document.getElementById("rubikStatus");
+
+const startColorGameButton =
+  document.getElementById("startColorGameButton");
+
+const rubikResult =
+  document.getElementById("rubikResult");
+
+const colorButtons =
+  document.querySelectorAll(".color-button");
   /*
     เปลี่ยนรหัสตรงนี้
   */
@@ -855,6 +1266,23 @@
 
   let giftIsOpen = false;
   let wrongCount = 0;
+  const availableColors = [
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "blue",
+  "white"
+];
+
+const totalRubikLevels = 3;
+
+let currentRubikLevel = 1;
+let colorSequence = [];
+let playerSequence = [];
+
+let colorGameIsShowing = false;
+let colorGameCanPlay = false;
 
   /* =========================
      ตรวจสอบรหัส
@@ -877,9 +1305,9 @@
     } else if (wrongCount === 2) {
       alert("ชื่อพ่อนาย 😏");
     } else if (wrongCount === 3) {
-      alert("อะล้อเล่นนน 🤣 อายุเท่าไหร่ล้าา");
+      alert("อะล้อเล่นนน 🤣 ปีนี้กี่ขวบ");
     } else {
-      alert("ยังไม่ถูกน้าา ลองใหม่อีกที 💛");
+      alert("โมโหหหห");
     }
 
     passwordInput.value = "";
@@ -1126,8 +1554,288 @@
   ========================== */
 
   function goNextPage() {
-    alert("กำลังไปหน้าถัดไป ❤️");
+  giftPage.classList.add("hide");
+  rubikGamePage.classList.add("show");
+}
+/* =========================
+   เริ่มเกมจำสี
+========================== */
+
+startColorGameButton.addEventListener(
+  "click",
+  startRubikColorGame
+);
+
+function startRubikColorGame() {
+  if (colorGameIsShowing) {
+    return;
   }
+
+  playerSequence = [];
+
+  colorGameCanPlay = false;
+  colorGameIsShowing = true;
+
+  startColorGameButton.disabled = true;
+  startColorGameButton.textContent =
+    "กำลังแสดงลำดับ...";
+
+  rubikStatus.textContent =
+    "ตั้งใจดูสีที่กะพริบนะ 👀";
+
+  rubikLevel.textContent =
+    `ด่านที่ ${currentRubikLevel} จาก ${totalRubikLevels}`;
+
+  /*
+    ด่าน 1 มี 3 สี
+    ด่าน 2 มี 4 สี
+    ด่าน 3 มี 5 สี
+  */
+
+  const sequenceLength =
+    currentRubikLevel + 2;
+
+  colorSequence =
+    createRandomColorSequence(sequenceLength);
+
+  showColorSequence();
+}
+
+/* =========================
+   สุ่มลำดับสี
+========================== */
+
+function createRandomColorSequence(length) {
+  const sequence = [];
+
+  for (
+    let index = 0;
+    index < length;
+    index += 1
+  ) {
+    const randomColor =
+      availableColors[
+        Math.floor(
+          Math.random() *
+          availableColors.length
+        )
+      ];
+
+    sequence.push(randomColor);
+  }
+
+  return sequence;
+}
+
+/* =========================
+   แสดงสีทีละสี
+========================== */
+
+async function showColorSequence() {
+  disableColorButtons(true);
+
+  await wait(700);
+
+  for (
+    const color of colorSequence
+  ) {
+    const selectedButton =
+      document.querySelector(
+        `[data-color="${color}"]`
+      );
+
+    selectedButton.classList.add("flash");
+
+    await wait(650);
+
+    selectedButton.classList.remove("flash");
+
+    await wait(280);
+  }
+
+  colorGameIsShowing = false;
+  colorGameCanPlay = true;
+
+  disableColorButtons(false);
+
+  rubikStatus.textContent =
+    "ตานายแล้ว กดสีตามลำดับเลย!";
+
+  startColorGameButton.textContent =
+    "ดูลำดับอีกครั้ง";
+
+  startColorGameButton.disabled = false;
+}
+
+/* =========================
+   ผู้เล่นกดสี
+========================== */
+
+colorButtons.forEach(
+  colorButton => {
+    colorButton.addEventListener(
+      "click",
+      function () {
+        const selectedColor =
+          colorButton.dataset.color;
+
+        handlePlayerColor(selectedColor);
+      }
+    );
+  }
+);
+
+function handlePlayerColor(selectedColor) {
+  if (!colorGameCanPlay) {
+    return;
+  }
+
+  flashSelectedButton(selectedColor);
+
+  playerSequence.push(selectedColor);
+
+  const currentPosition =
+    playerSequence.length - 1;
+
+  const expectedColor =
+    colorSequence[currentPosition];
+
+  /*
+    ถ้ากดผิด
+  */
+
+  if (selectedColor !== expectedColor) {
+    colorGameCanPlay = false;
+
+    disableColorButtons(true);
+
+    rubikStatus.textContent =
+      "ผิดลำดับแล้วว 😂 ลองใหม่อีกครั้ง";
+
+    playerSequence = [];
+
+    startColorGameButton.textContent =
+      "ลองด่านนี้ใหม่";
+
+    startColorGameButton.disabled = false;
+
+    return;
+  }
+
+  /*
+    ถ้ายังกดไม่ครบ
+  */
+
+  if (
+    playerSequence.length <
+    colorSequence.length
+  ) {
+    rubikStatus.textContent =
+      `ถูกแล้ว ${playerSequence.length}/${colorSequence.length}`;
+    return;
+  }
+
+  /*
+    ถ้ากดครบและถูกทั้งหมด
+  */
+
+  completeRubikLevel();
+}
+
+/* =========================
+   ผ่านแต่ละด่าน
+========================== */
+
+function completeRubikLevel() {
+  colorGameCanPlay = false;
+
+  disableColorButtons(true);
+
+  rubikStatus.textContent =
+    "ถูกต้องทั้งหมด! 🎉";
+
+  startColorGameButton.disabled = true;
+
+  setTimeout(() => {
+    if (
+      currentRubikLevel <
+      totalRubikLevels
+    ) {
+      currentRubikLevel += 1;
+
+      rubikLevel.textContent =
+        `ด่านที่ ${currentRubikLevel} จาก ${totalRubikLevels}`;
+
+      rubikStatus.textContent =
+        "ด่านต่อไปจะยาวขึ้นนะ 😏";
+
+      startColorGameButton.textContent =
+        `เริ่มด่านที่ ${currentRubikLevel}`;
+
+      startColorGameButton.disabled = false;
+
+      playerSequence = [];
+      colorSequence = [];
+
+      return;
+    }
+
+    finishRubikGame();
+  }, 1000);
+}
+
+/* =========================
+   ผ่านครบทุกด่าน
+========================== */
+
+function finishRubikGame() {
+  rubikGameContent.style.display = "none";
+
+  rubikResult.classList.add("show");
+
+  createEmojiRain();
+}
+
+/* =========================
+   เอฟเฟกต์ตอนกดสี
+========================== */
+
+function flashSelectedButton(color) {
+  const selectedButton =
+    document.querySelector(
+      `[data-color="${color}"]`
+    );
+
+  selectedButton.classList.add("flash");
+
+  setTimeout(() => {
+    selectedButton.classList.remove("flash");
+  }, 220);
+}
+
+/* =========================
+   เปิด-ปิดปุ่มสี
+========================== */
+
+function disableColorButtons(disabled) {
+  colorButtons.forEach(
+    colorButton => {
+      colorButton.disabled = disabled;
+    }
+  );
+}
+
+/* =========================
+   ฟังก์ชันหน่วงเวลา
+========================== */
+
+function wait(milliseconds) {
+  return new Promise(
+    resolve => {
+      setTimeout(resolve, milliseconds);
+    }
+  );
+}
 </script>
 
 </body>
