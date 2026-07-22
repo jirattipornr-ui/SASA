@@ -968,6 +968,73 @@
         transform: scale(1);
       }
 }
+    /* =========================
+   หน้าคั่นก่อนเฉลย
+========================== */
+
+.ready-result {
+  display: none;
+}
+
+.ready-result.show {
+  display: block;
+
+  animation: rubikResultAppear 0.7s ease;
+}
+
+.ready-emoji {
+  margin-bottom: 12px;
+
+  font-size: 72px;
+}
+
+.ready-title {
+  margin: 0 0 10px;
+
+  font-size: clamp(32px, 8vw, 46px);
+  font-weight: 850;
+}
+
+.ready-text {
+  margin: 0 0 24px;
+
+  color: #715b2d;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.ready-button {
+  width: 100%;
+  min-height: 56px;
+
+  padding: 14px 24px;
+
+  border: 0;
+  border-radius: 999px;
+
+  background: #29222b;
+  color: #ffffff;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(41, 34, 43, 0.22);
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.ready-button:hover {
+  opacity: 0.9;
+}
+
+.ready-button:active {
+  transform: scale(0.96);
+}
   </style>
 </head>
 
@@ -1009,8 +1076,8 @@
 
     <button
     class="next-button"
+    id="welcomeNextButton"
     type="button"
-    onclick="checkPassword()"
     >
     NEXT
     </button>
@@ -1044,7 +1111,6 @@
         id="giftButton"
         type="button"
         aria-label="เปิดกล่องของขวัญ"
-        onclick="openGift()"
       >
 
         <!-- โบว์สีแดง -->
@@ -1074,7 +1140,6 @@
     id="nextGiftButton"
     class="next-button"
     style="display:none;margin-top:20px;"
-    onclick="goNextPage()"
     >
 
     ถัดไป ❤️
@@ -1105,7 +1170,7 @@
         class="rubik-level"
         id="rubikLevel"
       >
-        ด่านที่ 1 จาก 3
+        ด่านที่ 1 จาก 2
       </div>
 
       <p
@@ -1172,6 +1237,33 @@
 
     </div>
 
+    <!-- หน้าคั่นก่อนดูเฉลย -->
+
+    <div
+      class="ready-result"
+      id="readyResult"
+    >
+      <div class="ready-emoji">
+        👀🎁
+      </div>
+
+      <h2 class="ready-title">
+        นายพร้อมยังง
+      </h2>
+
+      <p class="ready-text">
+        ถึงเวลารู้แล้วว่าของขวัญคืออะไร
+      </p>
+
+      <button
+        class="ready-button"
+        id="showResultButton"
+        type="button"
+      >
+        พร้อมแล้วว ❤️
+      </button>
+    </div>
+
     <!-- เฉลยของขวัญ -->
 
     <div
@@ -1236,6 +1328,9 @@
 
   const nextGiftButton =
     document.getElementById("nextGiftButton");
+
+  const welcomeNextButton =
+    document.getElementById("welcomeNextButton");
   const giftPage =
   document.getElementById("giftPage");
 
@@ -1257,6 +1352,12 @@ const startColorGameButton =
 const rubikResult =
   document.getElementById("rubikResult");
 
+const readyResult =
+  document.getElementById("readyResult");
+
+const showResultButton =
+  document.getElementById("showResultButton");
+
 const colorButtons =
   document.querySelectorAll(".color-button");
   /*
@@ -1275,7 +1376,7 @@ const colorButtons =
   "white"
 ];
 
-const totalRubikLevels = 3;
+const totalRubikLevels = 2;
 
 let currentRubikLevel = 1;
 let colorSequence = [];
@@ -1326,6 +1427,11 @@ let colorGameCanPlay = false;
       }
     }
   );
+
+  /* ผูกการทำงานของปุ่มหลัก */
+  welcomeNextButton.addEventListener("click", checkPassword);
+  giftButton.addEventListener("click", openGift);
+  nextGiftButton.addEventListener("click", goNextPage);
 
   /* =========================
      เปิดกล่องของขวัญ
@@ -1586,14 +1692,8 @@ function startRubikColorGame() {
   rubikLevel.textContent =
     `ด่านที่ ${currentRubikLevel} จาก ${totalRubikLevels}`;
 
-  /*
-    ด่าน 1 มี 3 สี
-    ด่าน 2 มี 4 สี
-    ด่าน 3 มี 5 สี
-  */
-
   const sequenceLength =
-    currentRubikLevel + 2;
+  currentRubikLevel === 1 ? 6 : 5;
 
   colorSequence =
     createRandomColorSequence(sequenceLength);
@@ -1790,9 +1890,17 @@ function completeRubikLevel() {
 
 function finishRubikGame() {
   rubikGameContent.style.display = "none";
+  readyResult.classList.add("show");
+}
 
+showResultButton.addEventListener(
+  "click",
+  showRubikResult
+);
+
+function showRubikResult() {
+  readyResult.classList.remove("show");
   rubikResult.classList.add("show");
-
   createEmojiRain();
 }
 
